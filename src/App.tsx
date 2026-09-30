@@ -42,9 +42,9 @@ export default function App() {
     <section className="conversation">{messages.map(msg => <div className={`message ${msg.role}`} key={msg.id}>{msg.role === 'assistant' && <div className="assistant-avatar"><img src={avatarSrc} alt="Gohu" /></div>}<div className="message-body">{msg.role === 'assistant' && <label>Gohu</label>}<div className="bubble">{msg.content}</div>
               {msg.role === 'assistant' &&
                 msg.response?.intent === 'MENU' &&
-                msg.response?.links?.length > 0 && (
+                (msg.response.links ?? []).length > 0 && (
                   <div className="chat-links">
-                    {msg.response.links.map((link) => (
+                    {(msg.response.links ?? []).map((link) => (
                       <a
                         key={link.url}
                         href={link.url}
